@@ -1,0 +1,73 @@
+---
+title: "Assignment 3"
+author: "Trishita Nath"
+date: "2/13/2021"
+output: html_document
+---
+
+## 1. Problem set 1
+1. What is the rank of the matrix A?
+```{r echo=TRUE, eval=TRUE}
+#loading required libraries
+library(pracma)
+A <-matrix(c(1,-1,0,5,2,0,1,4,3,1,-2,-2,4,3,1,-3),nrow = 4,ncol = 4)
+A
+rref(A)
+Rank(A)
+```
+2. Given an mxn matrix where m > n, what can be the maximum rank? The minimum rank, assuming that the matrix is non-zero?
+The max rank cannot be > than ‘n’. The min rank in this case (non-zero) is 1.
+
+Let Ra = rank of matrix X, where matrix X is an m x n matrix with m>n
+Ra≤{min(row_rank,column_rank)Ra≤{min(m,n)}
+We know the maximum rank will be n and since the matrix is non_zero,then
+Ra≤nRa≥1
+Hence minimum rank of matrix A would be 1
+```{r eval=TRUE}
+B <- matrix(c(1,3,2,2,6,4,1,3,2),nrow = 3, ncol= 3)
+B
+Rank(B)
+
+```
+## 2. Problem set 2
+Compute the eigenvalues and eigenvectors of the matrix A. You’ll need to show your
+work. You’ll need to write out the characteristic polynomial and show your solution.
+$$
+A=\left[\begin{array}{cc} 
+1 & 2 & 3\\
+0 & 4 & 5\\
+0 & 0 & 6
+\end{array}\right]\\
+Ax=\lambda x\\
+det(A-I\lambda)=0\\
+$$
+Solve for the roots of the polynomials to obtain the eigen values
+$$
+(1−\lambda)((4−\lambda)(6−\lambda))+2(0−0)+3(0−0)=0\\
+(1−\lambda)(4−\lambda)(6−\lambda)−0+0=0\\
+(1−\lambda)(24−4\lambda−6\lambda+λ^2)=0\\
+(1−\lambda)(24−10\lambda+\lambda^2)=0\\
+24−10\lambda+\lambda ^2−24λ+10\lambda ^2−\lambda ^3=0\\
+−\lambda ^3+11\lambda ^2−34\lambda +24=0\\
+$$
+Divide every term on the left and right side of the equation by a -1 to make the leading term positive
+$$
+\lambda ^3-11\lambda ^2+34\lambda-24=0\\
+$$
+Factoring by grouping
+$$
+(\lambda^3-11\lambda^2)+(34\lambda-24)=0\\
+\lambda ^ 2(\lambda-11)+2(17\lambda-12)=0\\
+$$
+This needs further factorization to solve. To simplify getting the roots of this equation, I will use R programming\
+Verifying the characteristic polynomial:
+```{r eval=TRUE}
+A <- matrix(c(1,2,3,0,4,5,0,0,6), 3, 3, byrow=TRUE)
+A
+library(pracma)
+charpoly(A)
+```
+Eigen values and vectors
+```{r eval=TRUE}
+eigen(A)
+```
